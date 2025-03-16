@@ -6,6 +6,7 @@ let pg ={
     cuerpoDom: document.querySelector("body"),
     lightbox: null,
     modal: null,
+    animacionGaleria: "fade",
 
 
 }
@@ -46,20 +47,52 @@ let mg = {
         pg.lightbox.appendChild(document.createElement("DIV")).setAttribute("id", "modal");
         pg.modal = document.querySelector("#modal"),
 
-        pg.modal.innerHTML = img.outerHTML+"<div>X</div>";
-
-        pg.modal.childNodes[0].style.width = "100%";
-        pg.modal.childNodes[0].style.border = "10px solid white";
-
+        pg.modal.innerHTML = img.outerHTML+"<div>x</div>";
 
         pg.modal.style.display = "block";
         pg.modal.style.position = "relative";
-        pg.modal.style.width = "60%";
-        pg.modal.style.top = "50%";
-        pg.modal.style.left = "50%";
-        pg.modal.style.marginLeft = -pg.modal.childNodes[0].width/2 + "px";
-        pg.modal.style.marginTop = -pg.modal.childNodes[0].height/2 + "px";
+        pg.modal.childNodes[0].style.width = "100%";
+        pg.modal.childNodes[0].style.border = "10px solid white";
 
+        if(window.matchMedia("(max-width:1000px)").matches){
+            pg.modal.style.width = "90%";
+        }else{
+
+            pg.modal.style.width = "60%";
+        }
+
+        // Animacion de izquierda a derecha --> cambiar en objeto propiedad animacionGaleria --> slide para que funcione
+        if (pg.animacionGaleria == "slide") {
+            pg.modal.style.top= "50%";
+            pg.modal.style.left= 0;
+            pg.modal.style.opacity = 0;
+            
+            setTimeout(function() {
+                pg.modal.style.transition = ".5s left ease";
+                pg.modal.style.left = "50%";
+                pg.modal.style.opacity = 1;
+                pg.modal.style.marginLeft = -pg.modal.childNodes[0].width/2 + "px";
+                pg.modal.style.marginTop = -pg.modal.childNodes[0].height/2 + "px";
+                
+            },50)
+            
+        }
+
+        if (pg.animacionGaleria == "fade") {
+            pg.modal.style.top= "50%";
+            pg.modal.style.left= "50%";
+            pg.modal.style.opacity = 0;
+            
+            setTimeout(function() {
+                pg.modal.style.transition = ".5s opacity ease";
+                pg.modal.style.left = "50%";
+                pg.modal.style.opacity = 1;
+                pg.modal.style.marginLeft = -pg.modal.childNodes[0].width/2 + "px";
+                pg.modal.style.marginTop = -pg.modal.childNodes[0].height/2 + "px";
+                
+            },50)
+            
+        }
 
 
 
@@ -76,22 +109,13 @@ let mg = {
         pg.modal.childNodes[1].style.borderRadius = "0px 0px 0px 5px";
 
 
-
-
-
-
-
-
+         pg.modal.childNodes[1].addEventListener("click", mg.salirGaleria);
 
         
-    
+    },
 
-
-
-
-
-
-        
+    salirGaleria:function(){
+        pg.cuerpoDom.removeChild(pg.lightbox);
     }
 
 }
