@@ -174,9 +174,7 @@ Efecto Mouse
 
 #efectoMouse{
 	position: relative;
-	height: 100px;
-	height: 500px;
-	background-color: silver;
+	/* width:500px; */
 	overflow: hidden;
 }
 
