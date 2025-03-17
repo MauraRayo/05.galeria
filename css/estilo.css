@@ -168,6 +168,28 @@ GALERIA
 #galeria ul li img{
 	width: 100%;
 }
+/* =============================================
+Efecto Mouse
+============================================= */
+
+#efectoMouse{
+	position: relative;
+	height: 100px;
+	height: 500px;
+	background-color: silver;
+	overflow: hidden;
+}
+
+#efectoMouse figure{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+
+
+
+
 
 /*=============================================
 PANTALLA DE ESCRITORIO GRANDE - LARGE (lg) - Portatil o pc
