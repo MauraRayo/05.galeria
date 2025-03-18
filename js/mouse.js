@@ -8,7 +8,6 @@ let pm ={
     mouseY: 0,
     horizontal: true,
     vertical : false,
-
 }
 
 
@@ -41,12 +40,10 @@ let mm = {
                 pm.figuras[i].style.left= pm.mouseX/(i*100+50) + "%";                
             }
             if(vertical){
-
                 pm.figuras[i].style.Top=  pm.mouseY/(i*100+50) + "%";
             }
         } 
     }
 
 }
-
 mm.inicioMouse();
