@@ -12,7 +12,8 @@ let ps = {
     botonera: document.querySelectorAll("nav ul li a"),
     ruta: null,
     intervalo: null, 
-    destinoScroll: 0
+    destinoScroll: 0,
+    padding:  0
  
   
 }
@@ -38,10 +39,12 @@ let ms = {
        if (ps.posicionScroll > 100) {
         ps.headerScroll.style.position = "fixed";
         ps.headerScroll.style.zIndex= 10;
+        ps.padding = 80;
             
        }else{
         ps.headerScroll.style.position = "relative";
         ps.headerScroll.style.zIndex= 0;
+        ps.padding = 180;
 
        }
 
@@ -52,7 +55,7 @@ let ms = {
          }}
          else{
             for (let i = 0; i < ps.articulos.length; i++) {
-                ps.articulos[i].style.marginLeft= ps.posicionScroll/25 -100 + "%";
+                ps.articulos[i].style.marginLeft= ps.posicionScroll/22.8 -100 + "%";
                 
             }
 
@@ -63,7 +66,7 @@ let ms = {
 
       ps.ruta = ruta.target.getAttribute("href");
       
-      ps.destinoScroll = document.querySelector(ps.ruta).offsetTop
+      ps.destinoScroll = document.querySelector(ps.ruta).offsetTop-ps.padding
 
       ps.intervalo = setInterval(function(){
         if(ps.posicionScroll < ps.destinoScroll){
@@ -74,7 +77,17 @@ let ms = {
                 clearInterval(ps.intervalo)
             }
 
+        }else{
+            ps.posicionScroll -= 100;
+
+            if(ps.posicionScroll <= ps.destinoScroll){
+                ps.posicionScroll = ps.destinoScroll;
+                clearInterval(ps.intervalo)
+            }
         }
+
+
+
          window.scrollTo(0,  ps.posicionScroll);
 
       }, 50)
