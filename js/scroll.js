@@ -8,7 +8,11 @@ let ps = {
     posicionScroll: 0,
     articulos: document.querySelectorAll("#scroll article"),
     cajaScroll: document.querySelector("#scroll"),
-    headerScroll: document.querySelector("header")
+    headerScroll: document.querySelector("header"),
+    botonera: document.querySelectorAll("nav ul li a"),
+    ruta: null,
+    intervalo: null, 
+    destinoScroll: 0
  
   
 }
@@ -21,9 +25,13 @@ let ps = {
 
 let ms = {
     incioScroll: function () {
-     document.addEventListener("scroll", ms.efectoParallax);
+     document.addEventListener("scroll", ms.efectoParallax)
+     for(let i =0; i < ps.botonera.length; i++){
+         ps.botonera[i].addEventListener("click", ms.desplazamiento)
+        }
         
     },
+
 
     efectoParallax: function(){
        ps.posicionScroll= window.pageYOffset;
@@ -49,6 +57,29 @@ let ms = {
             }
 
         } 
+    },
+    desplazamiento: function(ruta){
+        ruta.preventDefault();
+
+      ps.ruta = ruta.target.getAttribute("href");
+      
+      ps.destinoScroll = document.querySelector(ps.ruta).offsetTop
+
+      ps.intervalo = setInterval(function(){
+        if(ps.posicionScroll < ps.destinoScroll){
+            ps.posicionScroll += 100;
+
+            if(ps.posicionScroll >= ps.destinoScroll){
+                ps.posicionScroll = ps.destinoScroll;
+                clearInterval(ps.intervalo)
+            }
+
+        }
+         window.scrollTo(0,  ps.posicionScroll);
+
+      }, 50)
+
+
     }
 
 }
